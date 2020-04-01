@@ -12,5 +12,9 @@
       "url": "https://github.com/asonib/shop-app.git"
     },
     "author": "Aryan Soni",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies":{
+      "express": "^4.15.4",
+      "ejs": "^2.7.4"
+    }
   }
