@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-router.post('/login', (req, res) => {
-    res.render('login', {
-        'title': 'Login | Welcome!'
-    });
-});
+const loginRoute = require('../controllers/login');
+
+router.post('/login', loginRoute.addLogin);
 
 module.exports = router;
