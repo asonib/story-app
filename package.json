@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "storybook",
   "description": "Shop App",
   "version": "1.0.0",
@@ -24,24 +23,3 @@
     "passport-local": "^1.0.0"
   }
 }
-=======
-    "name": "storybook",
-    "description": "Shop App",
-    "version": "1.0.0",
-    "main": "app.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "start": "node app.js"
-    },
-    "repository": {
-      "type": "git",
-      "url": "https://github.com/asonib/shop-app.git"
-    },
-    "author": "Aryan Soni",
-    "license": "ISC",
-    "dependencies":{
-      "express": "^4.15.4",
-      "ejs": "^2.7.4"
-    }
-  }
->>>>>>> a98b3afbedec159a097224d96034803e8b544545
