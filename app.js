@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 
+const loginRoute = require('./routes/login');
+
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -14,11 +16,7 @@ app.get('/home', (req, res) => {
     });
 });
 
-app.post('/login', (req, res) => {
-    res.render('login', {
-        'title': 'Login | Welcome!'
-    });
-});
+app.use(loginRoute);
 
 app.use('', (req, res) => {
     res.render('notFound', {
