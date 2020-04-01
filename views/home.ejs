@@ -1,0 +1,16 @@
+<%- include('./includes/head.ejs') %>
+<title><%=title %></title>
+</head>
+
+<body>
+    <%- include('./includes/navbar.ejs') %>
+    <div class="jumbotron">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading"><%=body %></h4>
+            <form action='/login' method='POST'>
+                <button type='submit' name='Login'>Login</button>
+            </form>
+        </div>
+    </div>
+
+    <%- include('./includes/end.ejs') %>
