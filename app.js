@@ -3,6 +3,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const configData = require('./config/config');
+const password = configData.configFile.password;
+
 const registerRoute = require('./routes/register');
 const notFoundRoute = require('./routes/notFound');
 const homeRoute = require('./routes/home');
@@ -15,7 +18,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 
-mongoose.connect('mongodb://localhost/storyapp', {
+mongoose.connect('mongodb+srv://asonib:'+password+'@classifier-htisx.mongodb.net/test?retryWrites=true&w=majority', {
     useMongoClient: true
 })
 .then(() => {
