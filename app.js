@@ -27,6 +27,13 @@ app.use(registerRoute);
 app.use(notFoundRoute);
 app.use(homeRoute);
 
+app.get('/login', (req, res) => {
+    res.render('login');
+})
+app.post('/login', (req, res) => {
+    res.render('login');
+})
+
 
 port = process.env.PORT || 3000;
 app.listen(port, () => {

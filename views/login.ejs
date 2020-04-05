@@ -1,0 +1,13 @@
+<%- include('./includes/head.ejs') %>
+    <title><%=title %></title>
+</head>
+<body>
+    <%- include('./includes/navbar.ejs') %>
+    <div class="jumbotron">
+    <form action="/login" method="POST">
+        Email : <input type="email" name="email"><br>
+        Password : <input type="password" name="password"><br>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+<%- include('./includes/end.ejs') %>
