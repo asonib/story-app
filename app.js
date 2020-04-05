@@ -34,9 +34,7 @@ app.get('/login', (req, res) => {
         title: 'Login'
     });
 });
-app.post('/login', (req, res) => {
-    
-});
+
 
 
 port = process.env.PORT || 3000;
