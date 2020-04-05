@@ -1,5 +1,5 @@
 exports.addRegister = (req, res) => {
     res.render('register', {
-        'title': 'Login | Welcome!'
+        'title': 'Register | Welcome!'
     });
 }

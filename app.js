@@ -16,6 +16,8 @@ mongoose.connect('mongodb://localhost/storyapp', {
 .catch((err) => {
     console.log('Error conneting to mongoDB server');
 });
+require('./models/Register');
+const Register = mongoose.model('register');
 
 
 app.set('view engine', 'ejs');
@@ -28,11 +30,22 @@ app.use(notFoundRoute);
 app.use(homeRoute);
 
 app.get('/login', (req, res) => {
-    res.render('login');
-})
+    res.render('login', {
+        title: 'Login'
+    });
+});
 app.post('/login', (req, res) => {
-    res.render('login');
-})
+    const newUser = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    }
+    new Register=(newUser)
+    .save()
+    .then(register => {
+        res.redirect('/login');
+    })
+});
 
 
 port = process.env.PORT || 3000;
