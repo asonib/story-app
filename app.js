@@ -1,12 +1,20 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const registerRoute = require('./routes/register');
 const notFoundRoute = require('./routes/notFound');
 const homeRoute = require('./routes/home');
 
 const app = express();
+app.set('view engine', 'ejs');
+app.set('views', 'views');
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+
 mongoose.connect('mongodb://localhost/storyapp', {
     useMongoClient: true
 })
@@ -16,14 +24,6 @@ mongoose.connect('mongodb://localhost/storyapp', {
 .catch((err) => {
     console.log('Error conneting to mongoDB server');
 });
-require('./models/Register');
-const Register = mongoose.model('register');
-
-
-app.set('view engine', 'ejs');
-app.set('views', 'views');
-app.use(express.static(path.join(__dirname, 'public')));
-
 
 app.use(registerRoute);
 app.use(notFoundRoute);
@@ -35,16 +35,7 @@ app.get('/login', (req, res) => {
     });
 });
 app.post('/login', (req, res) => {
-    const newUser = {
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    }
-    new Register=(newUser)
-    .save()
-    .then(register => {
-        res.redirect('/login');
-    })
+    
 });
 
 
