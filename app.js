@@ -16,20 +16,22 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 
 
-mongoose.connect('mongodb+srv://asonib:'+password+'@classifier-htisx.mongodb.net/test?retryWrites=true&w=majority', {
-    useMongoClient: true
-})
-.then(() => {
-    console.log('MongoDB connected');
-})
-.catch((err) => {
-    console.log('Error conneting to mongoDB server');
-});
+mongoose.connect('mongodb+srv://asonib:' + password + '@classifier-htisx.mongodb.net/test?retryWrites=true&w=majority', {
+        useMongoClient: true
+    })
+    .then(() => {
+        console.log('MongoDB connected');
+    })
+    .catch((err) => {
+        console.log('Error conneting to mongoDB server');
+    });
 
 app.use(registerRoute);
 app.use(notFoundRoute);
@@ -46,42 +48,57 @@ require('./models/Register');
 const Register = mongoose.model('register');
 app.get('/edit/:id', (req, res) => {
     Register.findById({
-        _id: req.params.id
-    })
-    .then((singleUser) => {
-        res.render('edit', {
-            result: singleUser,
-            title: 'Edit'
+            _id: req.params.id
+        })
+        .then((singleUser) => {
+            res.render('edit', {
+                result: singleUser,
+                title: 'Edit'
+            });
+        })
+        .catch((err) => {
+            console.log('Cannot Fetch');
         });
-    })
-    .catch((err) => {
-        console.log('Cannot Fetch');
-    });
 });
 
 app.put('/edit/:id', (req, res) => {
     Register.findOne({
-        _id: req.params.id
-    })
-    .then((result) => {
-        result.name = req.body.name;
-        result.email = req.body.email;
-        result.password = req.body.password;
-        result.save()
+            _id: req.params.id
+        })
+        .then((result) => {
+            result.name = req.body.name;
+            result.email = req.body.email;
+            result.password = req.body.password;
+            result.save()
+                .then(() => {
+                    console.log('Updated Successfully');
+                    Register.find()
+                        .then((result) => {
+                            res.render('display', {
+                                users: result,
+                                title: 'Display Data'
+                            });
+                        });
+                })
+                .catch((err) => {
+                    console.log('Error Updating');
+                });
+        });
+});
+
+app.delete('/delete/:id', (req, res) => {
+    Register.findByIdAndDelete({
+            _id: req.params.id
+        })
         .then(() => {
-            console.log('Updated Successfully');
             Register.find()
             .then((result) => {
                 res.render('display', {
                     users: result,
-                    title: 'Display Data' 
+                    title: 'Display Data'
                 });
             });
-        })
-        .catch((err) => {
-            console.log('Error Updating');
         });
-    });
 });
 
 port = process.env.PORT || 3000;
