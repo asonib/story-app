@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 
-const configData = require('./config/config');
-const password = configData.configFile.password;
+// const configData = require('./config/config');
+// const password = configData.configFile.password;
 
 const registerRoute = require('./routes/register');
 const notFoundRoute = require('./routes/notFound');
@@ -23,7 +23,7 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 
 
-mongoose.connect('mongodb+srv://asonib:' + password + '@classifier-htisx.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect('mongodb://localhost/story', {
         useMongoClient: true
     })
     .then(() => {
