@@ -9,6 +9,7 @@ const password = configData.configFile.password;
 const registerRoute = require('./routes/register');
 const notFoundRoute = require('./routes/notFound');
 const homeRoute = require('./routes/home');
+const displayRoute = require('./routes/display');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -38,7 +39,7 @@ app.get('/login', (req, res) => {
     });
 });
 
-
+app.use(displayRoute);
 
 port = process.env.PORT || 3000;
 app.listen(port, () => {
