@@ -1,0 +1,17 @@
+<%- include('./includes/head.ejs') %>
+    <title><%=title %></title>
+</head>
+<body>
+    <%- include('./includes/navbar.ejs') %>
+    <div class="jumbotron">
+    
+    <form action="/edit/<%=result.id %>?_method=PUT" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        Name : <input type="text" name="name" value="<%=result.name %>"><br>
+        Email : <input type="email" name="email" value="<%=result.email %>"><br>
+        Password : <input type="password" name="password" value="<%=result.password %>"><br>
+        Confirm Password : <input type="password" name="confirm"><br><br>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+<%- include('./includes/end.ejs') %>
