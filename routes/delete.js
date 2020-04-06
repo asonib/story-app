@@ -1,23 +1,8 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const router = express.Router();
 
-require('../models/Register');
-const Register = mongoose.model('register');
+const deleteRoute = require('../controllers/delete');
 
-router.delete('/delete/:id', (req, res) => {
-    Register.findByIdAndDelete({
-            _id: req.params.id
-        })
-        .then(() => {
-            Register.find()
-            .then((result) => {
-                res.render('display', {
-                    users: result,
-                    title: 'Display Data'
-                });
-            });
-        });
-});
+router.delete('/delete/:id', deleteRoute.deleteData);
 
 module.exports = router;
