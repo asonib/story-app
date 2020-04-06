@@ -11,6 +11,8 @@ const registerRoute = require('./routes/register');
 const notFoundRoute = require('./routes/notFound');
 const homeRoute = require('./routes/home');
 const displayRoute = require('./routes/display');
+const editRoute = require('./routes/edit');
+const deleteRoute = require('./routes/delete');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -37,6 +39,8 @@ app.use(registerRoute);
 app.use(notFoundRoute);
 app.use(homeRoute);
 app.use(displayRoute);
+app.use(editRoute);
+app.use(deleteRoute);
 
 app.get('/login', (req, res) => {
     res.render('login', {
@@ -44,62 +48,6 @@ app.get('/login', (req, res) => {
     });
 });
 
-require('./models/Register');
-const Register = mongoose.model('register');
-app.get('/edit/:id', (req, res) => {
-    Register.findById({
-            _id: req.params.id
-        })
-        .then((singleUser) => {
-            res.render('edit', {
-                result: singleUser,
-                title: 'Edit'
-            });
-        })
-        .catch((err) => {
-            console.log('Cannot Fetch');
-        });
-});
-
-app.put('/edit/:id', (req, res) => {
-    Register.findOne({
-            _id: req.params.id
-        })
-        .then((result) => {
-            result.name = req.body.name;
-            result.email = req.body.email;
-            result.password = req.body.password;
-            result.save()
-                .then(() => {
-                    console.log('Updated Successfully');
-                    Register.find()
-                        .then((result) => {
-                            res.render('display', {
-                                users: result,
-                                title: 'Display Data'
-                            });
-                        });
-                })
-                .catch((err) => {
-                    console.log('Error Updating');
-                });
-        });
-});
-
-app.delete('/delete/:id', (req, res) => {
-    Register.findByIdAndDelete({
-            _id: req.params.id
-        })
-        .then(() => {
-            Register.find()
-            .then((result) => {
-                res.render('display', {
-                    users: result,
-                    title: 'Display Data'
-                });
-            });
-        });
-});
 
 port = process.env.PORT || 3000;
 app.listen(port, () => {
