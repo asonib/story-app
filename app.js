@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
+require('./config/passport')(passport);
 
 
 mongoose.connect('mongodb://localhost/story', {
