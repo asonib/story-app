@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const passport = require('passport');
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
 
@@ -46,6 +47,14 @@ app.get('/login', (req, res) => {
     res.render('login', {
         title: 'Login'
     });
+});
+
+app.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/home',
+        failureRedirect: '/login',
+        failureFlash: true
+    })
 });
 
 
