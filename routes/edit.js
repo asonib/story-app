@@ -5,20 +5,9 @@ const router = express.Router();
 require('../models/Register');
 const Register = mongoose.model('register');
 
-router.get('/edit/:id', (req, res) => {
-    Register.findById({
-            _id: req.params.id
-        })
-        .then((singleUser) => {
-            res.render('edit', {
-                result: singleUser,
-                title: 'Edit'
-            });
-        })
-        .catch((err) => {
-            console.log('Cannot Fetch');
-        });
-});
+const EditRoute = require('../controllers/edit');
+
+router.get('/edit/:id', EditRoute.EditData);
 
 router.put('/edit/:id', (req, res) => {
     Register.findOne({
