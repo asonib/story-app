@@ -14,6 +14,7 @@ const homeRoute = require('./routes/home');
 const displayRoute = require('./routes/display');
 const editRoute = require('./routes/edit');
 const deleteRoute = require('./routes/delete');
+const loginRoute = require('./routes/login');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -42,21 +43,7 @@ app.use(homeRoute);
 app.use(displayRoute);
 app.use(editRoute);
 app.use(deleteRoute);
-
-app.get('/login', (req, res) => {
-    res.render('login', {
-        title: 'Login'
-    });
-});
-
-app.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/home',
-        failureRedirect: '/login',
-        failureFlash: true
-    })
-});
-
+app.use(loginRoute);
 
 port = process.env.PORT || 3000;
 app.listen(port, () => {
