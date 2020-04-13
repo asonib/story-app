@@ -12,6 +12,6 @@ exports.displayData = (req, res) => {
         });
     })
     .catch((err) => {
-        consloe.log('Cannot fetch Data');
+        consloe.log('Cannot fetch Data'+err);
     })
 }

@@ -55,7 +55,7 @@ exports.postRegister = (req, res) => {
                     });
                 })
                 .catch((err) => {
-                    console.log('Error in Encryption process');
+                    console.log('Error in Encryption process'+err);
                 })
             });
         });

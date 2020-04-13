@@ -16,7 +16,7 @@ exports.editGet = (req, res) => {
             });
         })
         .catch((err) => {
-            console.log('Cannot Fetch');
+            console.log('Cannot Fetch');git 
         });
 }
 
@@ -43,7 +43,7 @@ exports.editPut = (req, res) => {
                             });
                     })
                     .catch((err) => {
-                        console.log('Error Updating');
+                        console.log('Error Updating'+err);
                     });
                 });
             });

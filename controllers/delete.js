@@ -14,6 +14,9 @@ exports.deleteData = (req, res) => {
                     users: result,
                     title: 'Display Data'
                 });
-            });
+            })
+            .catch((err) => {
+                console.log('error deleting'+err);
+            })
         });
 }
