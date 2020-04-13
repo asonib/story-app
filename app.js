@@ -38,6 +38,9 @@ mongoose.connect('mongodb://localhost/story', {
         console.log('Error conneting to mongoDB server');
     });
 
+app.get('/', (req, res) => {
+    res.render('landingPage');
+});
 app.use(registerRoute);
 app.use(notFoundRoute);
 app.use(homeRoute);
