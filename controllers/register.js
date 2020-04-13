@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 require('../models/Register')
 const Register = mongoose.model('register');
@@ -43,13 +44,22 @@ exports.postRegister = (req, res) => {
             email: req.body.email,
             password: req.body.password
         }
-        const newData = new Register(newUser);
-        newData.save()
-        .then(() => {
-            res.render('login', {
-                title: 'Login'
+        bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+                newUser.password = hash;
+                const newData = new Register(newUser);
+                newData.save()
+                .then(() => {
+                    res.render('login', {
+                        title: 'Login'
+                    });
+                })
+                .catch((err) => {
+                    console.log('Error in Encryption process');
+                })
             });
         });
+        
     
     }
 }
