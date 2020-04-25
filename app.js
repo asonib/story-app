@@ -27,16 +27,7 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 require('./config/passport')(passport);
 
-
-mongoose.connect('mongodb://localhost/story', {
-        useMongoClient: true
-    })
-    .then(() => {
-        console.log('MongoDB connected');
-    })
-    .catch((err) => {
-        console.log('Error conneting to mongoDB server');
-    });
+require('./config/mongoose');
 
 app.get('/', (req, res) => {
     res.render('landingPage');
